@@ -1,0 +1,26 @@
+sudo apt install default-jdk
+sudo apt install openjdk-11-jdk
+java -version
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+export HADOOP_HOME="/opt/hadoop-3.3.1"
+source $HOME/.profile
+
+echo $JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+echo $HADOOP_HOME /opt/hadoop-3.3.1
+dpkg -L openjdk-11-jdk
+wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz
+tar xvf hadoop-3.3.1.tar.gz
+sudo cp -r hadoop-3.3.1 "$HADOOP_HOME"
+echo "export PATH=\"\$PATH:\$HADOOP_HOME/bin\"" >>
+HOME/.profile
+source $HOME/.profile
+hadoop
+$wget https://raw.githubusercontent.com/ErikSchierboom/sentencegenerator/master/samples /the-king-james-bible.txt
+mkdir input
+mv the-king-james-bible.txt input
+ls -lh input
+-rw-rw-r-- 1 ubuntu ubuntu 4.2M AUG 14 10:20 the-king-james-bible.txt
+hadoop jar "$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar" wordcount input output
+ls -lh output
+tail output/part-r-00000
+$ rm -rf output
